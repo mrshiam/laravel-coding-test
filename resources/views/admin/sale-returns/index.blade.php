@@ -35,6 +35,30 @@
                         </tr>
                         </thead>
                         <tbody>
+                        @forelse ($saleReturns as $saleReturn)
+                            <tr>
+                                <td>{{ $saleReturn->serial_number }}</td>
+                                <td>{{ $saleReturn->date }}</td>
+                                <td>{{ $saleReturn->customer->name ?? 'N/A' }}</td>
+                                <td>{{ $saleReturn->total_quantity }}</td>
+                                <td>
+                                    @php
+                                        $productBarcodes = [];
+                                        foreach ($saleReturn->saleReturnItems as $item) {
+                                            foreach ($item->saleReturnItemBarcodes as $barcode) {
+                                                // Combine the product name and barcode
+                                                $productBarcodes[] = $item->product->name . '-' . $barcode->barcode;
+                                            }
+                                        }
+                                    @endphp
+                                    {{ implode(', ', $productBarcodes) }}
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="5" class="text-center">No Sale Returns Found</td>
+                            </tr>
+                        @endforelse
                         </tbody>
                     </table>
                 </div>

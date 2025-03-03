@@ -35,6 +35,29 @@
                         </tr>
                         </thead>
                         <tbody>
+                        @forelse ($sales as $sale)
+                            <tr>
+                                <td>{{ $sale->serial_number }}</td>
+                                <td>{{ $sale->date }}</td>
+                                <td>{{ $sale->customer->name ?? 'N/A' }}</td>
+                                <td>{{ $sale->total_quantity }}</td>
+                                <td>
+                                    @php
+                                        $productBarcodes = [];
+                                        foreach ($sale->saleItems as $item) {
+                                            foreach ($item->saleItemBarcodes as $barcode) {
+                                                $productBarcodes[] = $item->product->name . '-' . $barcode->barcode;
+                                            }
+                                        }
+                                    @endphp
+                                    {{ implode(', ', $productBarcodes) }}
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="5" class="text-center">No Sales Found</td>
+                            </tr>
+                        @endforelse
                         </tbody>
                     </table>
                 </div>

@@ -21,4 +21,14 @@ class Product extends Model
         return $this->hasMany(PurchaseReturnItem::class);
     }
 
+    public function sales()
+    {
+        return $this->hasMany(Sale::class);
+    }
+
+    public function salesReturn()
+    {
+        return $this->hasMany(SaleReturn::class);
+    }
+
 }
