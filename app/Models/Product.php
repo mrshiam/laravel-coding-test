@@ -10,4 +10,15 @@ class Product extends Model
     use HasFactory;
 
     protected $fillable = ['name', 'purchase_price', 'sale_price', 'image'];
+
+    public function purchaseItems()
+    {
+        return $this->hasMany(PurchaseItem::class);
+    }
+
+    public function purchaseReturnItems()
+    {
+        return $this->hasMany(PurchaseReturnItem::class);
+    }
+
 }

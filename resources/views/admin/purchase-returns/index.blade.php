@@ -35,6 +35,31 @@
                         </tr>
                         </thead>
                         <tbody>
+                        @forelse ($purchaseReturns as $return)
+                            <tr>
+                                <td>{{ $return->serial_number }}</td>
+                                <td>{{ $return->date }}</td>
+                                <td>{{ $return->supplier->name ?? 'N/A' }}</td>
+                                <td>{{ $return->total_quantity }}</td>
+                                <td>
+                                    @php
+                                        $productBarcodes = [];
+                                        foreach ($return->purchaseReturnItems as $item) {
+                                            foreach ($item->purchaseReturnItemBarcodes as $barcode) {
+                                                
+                                                $productBarcodes[] = $item->product->name . '-' . $barcode->barcode;
+                                            }
+                                        }
+                                    @endphp
+                                    {{ implode(', ', $productBarcodes) }}
+                                </td>
+
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="5" class="text-center">No Returns Found</td>
+                            </tr>
+                        @endforelse
                         </tbody>
                     </table>
                 </div>

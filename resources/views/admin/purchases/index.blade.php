@@ -34,6 +34,31 @@
                         </tr>
                         </thead>
                         <tbody>
+                        @forelse ($purchases as $purchase)
+                            <tr>
+                                <td>{{ $purchase->serial_number }}</td>
+                                <td>{{ $purchase->date }}</td>
+                                <td>{{ $purchase->supplier->name ?? 'N/A' }}</td>
+                                <td>{{ $purchase->total_quantity }}</td>
+                                <td>
+                                    @php
+                                        $productBarcodes = [];
+                                        foreach ($purchase->purchaseItems as $item) {
+                                            foreach ($item->purchaseItemBarcodes as $barcode) {
+                                                
+                                                $productBarcodes[] = $item->product->name . ' - ' . $barcode->barcode ;
+                                            }
+                                        }
+                                    @endphp
+                                    {{ implode(', ', $productBarcodes) }}
+                                </td>
+
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="5" class="text-center">No Purchases Found</td>
+                            </tr>
+                        @endforelse
                         </tbody>
                     </table>
                 </div>

@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class PurchaseReturnItemBarcode extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['purchase_return_item_id', 'barcode', 'unit_price', 'quantity'];
+
+    public function purchaseReturnItem()
+    {
+        return $this->belongsTo(PurchaseReturnItem::class);
+    }
 }
