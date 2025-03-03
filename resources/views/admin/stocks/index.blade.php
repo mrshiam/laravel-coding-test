@@ -5,7 +5,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="text-center text-danger">[Solve using SQL Join]</h3>
+                    <h3 class="text-center text-success">[Solved using SQL Join]</h3>
                 </div>
                 <div class="card-header">
                     <h3 class="card-title">Product wise Stock List</h3>
@@ -36,6 +36,20 @@
                         </tr>
                         </thead>
                         <tbody>
+                        @forelse ($products as $product)
+                            <tr>
+                                <td>{{ $product->product_name }}</td>
+                                <td>{{ $product->total_purchased_quantity }}</td>
+                                <td>{{ $product->total_purchase_returned_quantity }}</td>
+                                <td>{{ $product->total_sold_quantity }}</td>
+                                <td>{{ $product->total_sale_returned_quantity }}</td>
+                                <td>{{ $product->stock_quantity }}</td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="6" class="text-center">No Products Found</td>
+                            </tr>
+                        @endforelse
                         </tbody>
                     </table>
                 </div>

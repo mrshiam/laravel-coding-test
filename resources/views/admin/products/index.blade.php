@@ -5,7 +5,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="text-center text-danger">[Solve using Eloquent ORM]</h3>
+                    <h3 class="text-center text-success">[Solved using Eloquent ORM]</h3>
                     @if(session('success'))
                         <div class="alert alert-success alert-dismissible fade show" role="alert">
                             {{ session('success') }}
@@ -69,7 +69,7 @@
                                     <td>${{ number_format($product->sale_price, 2) }}</td>
                                     <td class="d-flex">
                                         <a style="margin-right: 10px;"  href="{{ route('admin.products.edit', $product->id) }}"><button type="button" class="btn btn-block btn-info">Update</button></a>
-                                        <form action="{{ route('admin.products.destroy', $product->id) }}" method="POST" style="display:inline;">
+                                        <form action="{{ route('admin.products.destroy', $product->id) }}" method="POST" style="display:inline;" onsubmit="return confirmDelete()">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-block btn-danger">Delete</button>

@@ -5,7 +5,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="text-center text-danger">[Solve using Eloquent ORM]</h3>
+                    <h3 class="text-center text-success">[Solved using Eloquent ORM]</h3>
                 </div>
                 <div class="card-header">
                     <h3 class="card-title">Sale Return List</h3>

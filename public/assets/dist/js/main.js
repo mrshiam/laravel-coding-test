@@ -5,3 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
         e.target.nextElementSibling.textContent = fileName;
     });
 });
+
+function confirmDelete() {
+    return confirm("Are you sure you want to delete this item?");
+}
